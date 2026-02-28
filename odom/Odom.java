@@ -20,6 +20,8 @@ public class Odom {
         this.xPosition = x;
         this.yPosition = y;
         this.orientationDeg = orientation;
+        this.forwardTrackerPosition  = 0;
+        this.sidewaysTrackerPosition = 0;
     }
 
     public void updatePosition(double forwardTrackerPosition, double sidewaysTrackerPosition, double orientationDeg) {
@@ -36,7 +38,7 @@ public class Odom {
         this.orientationDeg = orientationDeg;
         // TODO: write explanation for math later
         double localX, localY;
-        if (orientationDeltaRad == 0f) {
+        if (orientationDeltaRad == 0) {
             localX = sidewaysDelta;
             localY = forwardDelta;
         } else {
