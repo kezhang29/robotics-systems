@@ -79,4 +79,12 @@ Consider the chord between the center of the robot before moving and after the m
 from the robot's initial "forward" by $\theta/2$. Thus the local y axis translation is $2 \sin(\theta/2) (\frac{\Delta{R}}{\theta} + s_R)$. We can calculate translation along the x axis in a similar way. 
 Doing so gives our position vector as $2 \sin(\theta/2) (\frac{\Delta{S}}{\theta} + s_S, \frac{\Delta{R}}{\theta} + s_R).$ However, this is offset by $\theta_0 + \theta/2$ from the global coordinate system, where $\theta_0$ is the pervious robot orientation. Thus we rotate our local position vector by that amount and the global translation vector can be calculated.
 
+### Usage
+Given a coordinate system that we can base our robot on, the robot doesn't have to drive in straight lines anymore. Essentially the idea now is we have a target point and a point that our robot is at currently (from our odom)
+and we calculate the distance and the angle needed to get there. Then PID does the rest of the work. Here is a simulation of this **drive to point function**:
+<img width="500" height="500" alt="Screenshot 2026-02-28 at 1 21 57 PM" src="https://github.com/user-attachments/assets/d485e077-b325-4999-b06d-a803e1e611cc" /> <img width="500" height="500" alt="Screenshot 2026-02-28 at 1 24 32 PM" src="https://github.com/user-attachments/assets/7c1e488e-0827-454d-b611-9cb93e3b34e3" />
+
+You can see that in the second image, the position that odometry is reading is offset from the robot's real coordinates. 
+
+
 
