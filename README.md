@@ -55,6 +55,14 @@ This is one with a high kP that caused oscillation:
 
 <img width="1144" height="758" alt="Screenshot 2026-02-18 at 2 32 08 PM" src="https://github.com/user-attachments/assets/08bbe3bc-453e-4fb9-8c71-b0ebd37823a4" />
 
+
+## Bang-bang control
+
+A bang-bang control scheme is a feedback cntrol strategy that switches adruptly between two discrete states, based upon a setpoint rather than output. This is most commonly used in flywheel control. Bang-bang control is inadequate for tasks like chassis control and lift mechanims, but can be found in real life in mechanisdms such as a thermostat. The idea here in the thermostat example is when the room is below a target temperature, the heating system will try to heat the room until the room is at target temperature. If the room is above a target temperature, the heating system will try to cool the room down. The target temperature can be defined as a target area (a range) to prevent oscillation. 
+
+
+
+
 ## ODOMETRY
 (ref https://wiki.purduesigbots.com/software/odometry)
 Odometry is a way to track the robot's position and orientation on the field using tracking wheels. The position tracking works 
@@ -82,6 +90,7 @@ Doing so gives our position vector as $2 \sin(\theta/2) (\frac{\Delta{S}}{\theta
 ### Usage
 Given a coordinate system that we can base our robot on, the robot doesn't have to drive in straight lines anymore. Essentially the idea now is we have a target point and a point that our robot is at currently (from our odom)
 and we calculate the distance and the angle needed to get there. Then PID does the rest of the work. Here is a simulation of this **drive to point function**:
+
 <img width="450" height="450" alt="Screenshot 2026-02-28 at 1 21 57 PM" src="https://github.com/user-attachments/assets/d485e077-b325-4999-b06d-a803e1e611cc" /> 
 
 <img width="450" height="450" alt="Screenshot 2026-02-28 at 1 24 32 PM" src="https://github.com/user-attachments/assets/7c1e488e-0827-454d-b611-9cb93e3b34e3" />
