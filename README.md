@@ -63,8 +63,7 @@ A bang-bang control scheme is a feedback cntrol strategy that switches adruptly 
 
 
 
-## ODOMETRY
-(ref https://wiki.purduesigbots.com/software/odometry)
+## Odometry
 Odometry is a way to track the robot's position and orientation on the field using tracking wheels. The position tracking works 
 by modeling the robot's motion as arcs over infinitely small time intervals. 
 <img width="698" height="313" alt="Screenshot 2026-02-22 at 3 11 34 PM" src="https://github.com/user-attachments/assets/13b87be6-d37d-494b-90f0-69a53ea94ba8" />
@@ -91,11 +90,39 @@ Doing so gives our position vector as $2 \sin(\theta/2) (\frac{\Delta{S}}{\theta
 Given a coordinate system that we can base our robot on, the robot doesn't have to drive in straight lines anymore. Essentially the idea now is we have a target point and a point that our robot is at currently (from our odom)
 and we calculate the distance and the angle needed to get there. Then PID does the rest of the work. Here is a simulation of this **drive to point function**:
 
-<img width="450" height="450" alt="Screenshot 2026-02-28 at 1 21 57 PM" src="https://github.com/user-attachments/assets/d485e077-b325-4999-b06d-a803e1e611cc" /> 
+<img width="300" height="300" alt="Screenshot 2026-02-28 at 1 21 57 PM" src="https://github.com/user-attachments/assets/d485e077-b325-4999-b06d-a803e1e611cc" /> 
 
-<img width="450" height="450" alt="Screenshot 2026-02-28 at 1 24 32 PM" src="https://github.com/user-attachments/assets/7c1e488e-0827-454d-b611-9cb93e3b34e3" />
+<img width="300" height="300" alt="Screenshot 2026-02-28 at 1 24 32 PM" src="https://github.com/user-attachments/assets/7c1e488e-0827-454d-b611-9cb93e3b34e3" />
 
 You can see that in the second image, the position that odometry is reading is offset from the robot's real coordinates. 
+
+## Pure Pursuit
+Pure pursuit is an automatic steering method for differential drive robots. Given a path represented as a series of waypoints, the controller calculates the angular velocity necessary to keeo the robot on the path, while keeping linear velocity constant or controlled by a PID algorithim. 
+
+The main idea is to project a circle around a robot and the point it intersects along the path is the goal point, or carrot, the the robot chases. This circle's radius is known as the ```lookAheadDistance```.
+
+### Line-Circle Intersection
+
+If we offset the system to the origin, we can use the discriminant to determine whether or not intersections exist.
+
+<img width="652" height="474" alt="Screenshot 2026-04-04 at 4 51 42 PM" src="https://github.com/user-attachments/assets/4f3b2264-2ac8-4b72-8881-761f64736bee" />
+
+Here if the ```discriminant >= 0```  then there exists valid solutions. Intersections are only valid if they fall within the bounding box of the segment, i.e.:
+```
+min(x1,x2) <= sol_x <= max(x1,x2)
+min(y1,y2) <= sol_y <= max(y1,y2)
+```
+
+### Goal Point Selection
+
+In the case of two valid segments on a path, we prefer the one closer to the next waypoint on the path. To prevent the robot from backtracking, a ```lastFoundIndex``` variable keeps track of the previous found point. This prevents the robot from following previous segments on the path. Also, an additional safegaurd is to only select the goal point if it's closer to the next waypoint than the robot's current position. 
+
+
+## Resources
+Purdue Sigbots Wiki     
+[https://wiki.purduesigbots.com/software/odometry]        
+[https://wiki.purduesigbots.com/software/control-algorithms/basic-pure-pursuit]
+
 
 
 
