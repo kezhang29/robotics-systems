@@ -117,6 +117,9 @@ min(y1,y2) <= sol_y <= max(y1,y2)
 
 In the case of two valid segments on a path, we prefer the one closer to the next waypoint on the path. To prevent the robot from backtracking, a ```lastFoundIndex``` variable keeps track of the previous found point. This prevents the robot from following previous segments on the path. Also, an additional safegaurd is to only select the goal point if it's closer to the next waypoint than the robot's current position. 
 
+https://github.com/user-attachments/assets/605e698a-7c9b-44f1-8b24-65039ce63e0a
+
+
 
 ## Resources
 Purdue Sigbots Wiki     
