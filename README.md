@@ -119,12 +119,17 @@ In the case of two valid segments on a path, we prefer the one closer to the nex
 
 https://github.com/user-attachments/assets/605e698a-7c9b-44f1-8b24-65039ce63e0a
 
+## Boomerang Controller
+
+This is a odometry-based algroithim which returns a carrot point rather than motor power at all times. The robot should travel to the carrot point to construct the path. 
+
 
 
 ## Resources
 Purdue Sigbots Wiki     
 [https://wiki.purduesigbots.com/software/odometry]        
 [https://wiki.purduesigbots.com/software/control-algorithms/basic-pure-pursuit]
+[https://orange-depot.github.io/posts/Boomerang-Controller/]
 
 
 
